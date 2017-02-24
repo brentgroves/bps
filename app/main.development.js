@@ -1,9 +1,12 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
+const qs = require ("querystring");
 
 let menu;
 let template;
 let mainWindow = null;
-//const debug=false;
+let pdfWindow = null;
+//const pdfURL = "http://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf";
+
 const debug=true;
 
 if (process.env.NODE_ENV === 'production') {
@@ -24,7 +27,7 @@ app.on('window-all-closed', () => {
 
 
 const installExtensions = async () => {
-  if (process.env.NODE_ENV === 'development') {
+  if ((true==debug)||(process.env.NODE_ENV === 'development')) {
     const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
 
     const extensions = [
@@ -48,9 +51,43 @@ app.on('ready', async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728
+    width: 1400,
+    height: 1200
   });
+//https://github.com/seanchas116/electron-pdfjs
+  ipcMain.on('asynchronous-message', (event, fullPathName) => {
+    console.log(fullPathName);  // prints "ping"
+
+    pdfWindow = new BrowserWindow({
+      show: true,
+      width: 800,
+      height: 600,
+      webPreferences: {
+        nodeIntegration: false,
+        webSecurity: false,
+      },
+    });
+    let pdfURL = 'file://' + fullPathName;
+
+//    let pdfURL = 'file://' + app.getPath('temp') + '/myfile.pdf';
+
+    let param = qs.stringify({file: pdfURL});
+    if ('development'==process.env.NODE_ENV) {
+      console.log(`pdfURL: ${pdfURL}`);
+  //    console.log(`app.on().__dirname: ${__dirname}`);
+    }
+
+//  pdfWindow.webContents.openDevTools();
+
+    pdfWindow.on('closed', function() {
+      pdfWindow = null;
+    });
+
+    pdfWindow.loadURL('file://' + __dirname + '/pdfjs/web/viewer.html?' + param);
+    //event.sender.send('asynchronous-reply', 'pong')
+    //pdfWindow.show();
+    
+  })
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
@@ -274,6 +311,7 @@ if ((true==debug)||(process.env.NODE_ENV === 'development')) {
       }]
     }];
     menu = Menu.buildFromTemplate(template);
-    mainWindow.setMenu(menu);
+//    mainWindow.setMenu(menu);
+    mainWindow.setMenu(null);
   }
 });

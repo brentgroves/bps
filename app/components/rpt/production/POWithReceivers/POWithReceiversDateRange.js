@@ -78,7 +78,7 @@ export default class POWithReceiversDateRange extends React.Component {
       dateHeader=<h3 style={{textAlign:'center'}}>{this.props.ProdRpt.poWithReceivers.dateHeader.text}</h3>
       dateStyle='default';
     }else{
-      dateHeader=<h3 style={{textAlign:'center',color:'red !important'}}>{this.props.ProdRpt.openPOWithReceivers.dateHeader.text}</h3>
+      dateHeader=<h3 style={{textAlign:'center',color:'red !important'}}>{this.props.ProdRpt.poWithReceivers.dateHeader.text}</h3>
       dateStyle='danger';
     }
 

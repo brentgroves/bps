@@ -143,7 +143,7 @@ export async function poWithReceivers(disp,getSt) {
           }
 
           fs.writeFileSync(fileName,body);
-          dispatch({ type:ACTION.SET_CLOSEDPO_REPORT_DONE, done:true });
+          dispatch({ type:ACTION.SET_POWITHRECEIVERS_REPORT_DONE, done:true });
           if ('development'==process.env.NODE_ENV) {
             console.log(`Done creating file myfile.pdf `);
             console.log(`fileName: ${fileName}`);
@@ -153,7 +153,7 @@ export async function poWithReceivers(disp,getSt) {
     });
     var cnt=0;
     var maxCnt=15;
-    while(!getState().ProdReports.openPOWithReceivers.done){
+    while(!getState().ProdReports.poWithReceivers.done){
       if(++cnt>maxCnt){
         continueProcess=false;
         break;
