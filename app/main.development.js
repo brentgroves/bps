@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
+require('pdfjs-dist');
 const qs = require ("querystring");
 
 let menu;
