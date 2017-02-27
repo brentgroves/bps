@@ -149,6 +149,7 @@
     "less-loader": "^2.2.3",
     "minimist": "^1.2.0",
     "mocha": "^3.2.0",
+    "pdfjs-dist": "^1.7.316",
     "react-addons-test-utils": "^15.4.2",
     "redux-logger": "^2.7.4",
     "sinon": "^1.17.7",
