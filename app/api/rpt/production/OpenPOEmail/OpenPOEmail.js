@@ -71,7 +71,6 @@ export async function openPOEmail(disp,getSt) {
   var state=getState();
   var openPOEmail=getState().ProdReports.openPOEmail;
 
-  dispatch({type:ACTION.INIT_NO_STATE});
   dispatch({ type:ACTION.SET_PROGRESS_BTN,progressBtn:PROGRESSBUTTON.LOADING });
   dispatch({ type:ACTION.SET_STATE, state:STATE.STARTED });
 

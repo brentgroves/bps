@@ -85,10 +85,16 @@ export default function reducer( state = initialState, action) {
       return newData;
     }
 
-    case ACTION.INIT_NO_STATE:
+
+ 
+ 
+    /////////////////////////////////////////////////////////////////
+    // PO With Receivers Start
+    /////////////////////////////////////////////////////////////////
+    case ACTION.INIT_POWITHRECEIVERS:
     {
       if ('development'==process.env.NODE_ENV) {
-        console.log('RPT_INIT_NO_STATE');
+        console.log('INIT_POWITHRECEIVERS');
       }
       var newData = update(state, 
         { 
@@ -99,42 +105,12 @@ export default function reducer( state = initialState, action) {
             done:false,
             failed:false
           }},
-          poNoReceivers:{$set:{
-            dateHeader:{text:'Date Range',valid:true},
-            dateStart:null,
-            dateEnd:null,
-            done:false,
-            failed:false
-          }},
-          openPOEmail:{$set:{
-              curPage:1,
-              dateStart:null,
-              dateEnd:null,
-              dateHeader:{text:'Date Range',valid:true},
-              emailHeader:{text:'Email',valid:true},
-              emailMRO:false,
-              emailVendor:false,
-              maxPage:3,
-              poItem:[],
-              po:[],
-              select:[],
-              selectDelim:[],
-              pager:{$set:{done:false,failed:false}},
-              sqlOpenPOEmail:{$set:{done:false,failed:false}},
-              openPOEmailPager:{$set:{done:false,failed:false}}
-          }},
           progressBtn:{$set:PROGRESSBUTTON.READY},
- //         poStatusReport:{$set:{pdf:'',done:false,failed:false}},
           reason:{$set:''},
           status:{$set: ''}
         });
       return newData;
     }
-
-
-    /////////////////////////////////////////////////////////////////
-    // PO With Receivers Start
-    /////////////////////////////////////////////////////////////////
     case ACTION.SET_POWITHRECEIVERS_REPORT_FAILED:
     {
       var poWithReceivers = state.poWithReceivers;
@@ -185,6 +161,27 @@ export default function reducer( state = initialState, action) {
     /////////////////////////////////////////////////////////////////
     // PO No Receivers Start
     /////////////////////////////////////////////////////////////////
+   case ACTION.INIT_PONORECEIVERS:
+    {
+      if ('development'==process.env.NODE_ENV) {
+        console.log('INIT_PONORECEIVERS');
+      }
+      var newData = update(state, 
+        { 
+          poNoReceivers:{$set:{
+            dateHeader:{text:'Date Range',valid:true},
+            dateStart:null,
+            dateEnd:null,
+            done:false,
+            failed:false
+          }},
+          progressBtn:{$set:PROGRESSBUTTON.READY},
+          reason:{$set:''},
+          status:{$set: ''}
+        });
+      return newData;
+    }
+
     case ACTION.SET_PONORECEIVERS_REPORT_FAILED:
     {
       var poNoReceivers = state.poNoReceivers;
@@ -235,6 +232,36 @@ export default function reducer( state = initialState, action) {
     /////////////////////////////////////////////////////////////////
     // Open PO Email Start
     /////////////////////////////////////////////////////////////////
+    case ACTION.INIT_OPENPOEMAIL:
+    {
+      if ('development'==process.env.NODE_ENV) {
+        console.log('INIT_OPENPOEMAIL');
+      }
+      var newData = update(state, 
+        { 
+          openPOEmail:{$set:{
+              curPage:1,
+              dateStart:null,
+              dateEnd:null,
+              dateHeader:{text:'Date Range',valid:true},
+              emailHeader:{text:'Email',valid:true},
+              emailMRO:false,
+              emailVendor:false,
+              maxPage:3,
+              poItem:[],
+              po:[],
+              select:[],
+              selectDelim:[],
+              pager:{$set:{done:false,failed:false}},
+              sqlOpenPOEmail:{$set:{done:false,failed:false}},
+              openPOEmailPager:{$set:{done:false,failed:false}}
+          }},
+          progressBtn:{$set:PROGRESSBUTTON.READY},
+          reason:{$set:''},
+          status:{$set: ''}
+        });
+      return newData;
+    }
     case ACTION.OPENPOEMAIL_MRO_TOGGLE:
     {
       var openPOEmail = state.openPOEmail;

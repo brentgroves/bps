@@ -10,6 +10,7 @@ export const SET_STATUS = 'RPT_SET_STATUS';
 /////////////////////////////////////////////////////////////////
 // Open PO Email Start
 /////////////////////////////////////////////////////////////////
+export const INIT_OPENPOEMAIL = 'INIT_OPENPOEMAIL';
 export const OPENPOEMAIL_MRO_TOGGLE ='OPENPOEMAIL_MRO_TOGGLE';
 export const OPENPOEMAIL_VENDOR_TOGGLE = 'OPENPOEMAIL_VENDOR_TOGGLE';
 export const OPENPOEMAIL_PAGER_DONE = 'OPENPOEMAIL_PAGER_DONE';
@@ -37,6 +38,7 @@ export const TOGGLE_OPENPOEMAIL_VISIBLE = 'TOGGLE_OPENPOEMAIL_VISIBLE';
 /////////////////////////////////////////////////////////////////
 // PO With Receivers Start
 /////////////////////////////////////////////////////////////////
+export const INIT_POWITHRECEIVERS = 'INIT_POWITHRECEIVERS';
 export const SET_POWITHRECEIVERS_DATE_HEADER = 'SET_POWITHRECEIVERS_DATE_HEADER';
 export const SET_POWITHRECEIVERS_DATE_START = 'SET_POWITHRECEIVERS_DATE_START';
 export const SET_POWITHRECEIVERS_DATE_END = 'SET_POWITHRECEIVERS_DATE_END';
@@ -50,6 +52,7 @@ export const SET_POWITHRECEIVERS_REPORT_FAILED = 'POWITHRECEIVERS_REPORT_FAILED'
 /////////////////////////////////////////////////////////////////
 // PO No Receivers Start
 /////////////////////////////////////////////////////////////////
+export const INIT_PONORECEIVERS = 'INIT_PONORECEIVERS';
 export const SET_PONORECEIVERS_DATE_HEADER = 'SET_PONORECEIVERS_DATE_HEADER';
 export const SET_PONORECEIVERS_DATE_START = 'SET_PONORECEIVERS_DATE_START';
 export const SET_PONORECEIVERS_DATE_END = 'SET_PONORECEIVERS_DATE_END';

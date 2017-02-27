@@ -76,6 +76,17 @@ export function setProgressBtn(goButton) {
 /////////////////////////////////////////////////////////////////
 // Open PO Email Start
 /////////////////////////////////////////////////////////////////
+export function initOpenPOEmail() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.initOpenPOEmail()->top.`);
+  }
+
+ return (dispatch,getState) => {
+      dispatch({ type:ACTION.INIT_OPENPOEMAIL });
+  };
+}
+
+
 export function openPOEmail() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.OpenPOEMail()->top.`);
@@ -231,6 +242,16 @@ export function toggleOpenPOEmailVisible(poNumber) {
 /////////////////////////////////////////////////////////////////
 // PO With Receivers Start
 /////////////////////////////////////////////////////////////////
+export function initPOWithReceivers() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.initPOWithReceivers()->top.`);
+  }
+
+ return (dispatch,getState) => {
+      dispatch({ type:ACTION.INIT_POWITHRECEIVERS });
+  };
+}
+
 
 export function poWithReceivers() {
   if ('development'==process.env.NODE_ENV) {
@@ -300,6 +321,15 @@ export function setPOWithReceiversDateEnd(dateEnd) {
 /////////////////////////////////////////////////////////////////
 // PO No Receivers Start
 /////////////////////////////////////////////////////////////////
+export function initPONoReceivers() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.initPONoReceivers()->top.`);
+  }
+
+ return (dispatch,getState) => {
+      dispatch({ type:ACTION.INIT_PONORECEIVERS });
+  };
+}
 export function poNoReceiversPrompt() {
   if ('development'==process.env.NODE_ENV) {
     console.log(`ACTIONS.PONoReceiversPrompt()->top.`);

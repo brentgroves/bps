@@ -506,11 +506,18 @@ export default class Reports extends Component {
               <table className={styles.tg}>
               <tbody>
                 <tr>
-                  <td className={styles.btnPrimary} onClick={()=>{this.props.poNoReceiversPrompt();}} ><span style={rpt1Style}>PO(s) with No Receivers</span><br/>PDF format</td>
+                  <td className={styles.btnPrimary} onClick={()=>{
+                    this.props.initPONoReceivers();
+                    this.props.poNoReceiversPrompt();
+                  }} ><span style={rpt1Style}>PO(s) with No Receivers</span><br/>PDF format</td>
                   <td className={styles.btnSuccess} 
-                  onClick={()=>{this.props.openPOEmail();}}>
+                  onClick={()=>{
+                    this.props.initOpenPOEmail();
+                    this.props.openPOEmail();}}>
                   <span style={rpt1Style}>Open PO</span><br/>MRO/Vendor Email</td>
-                  <td className={styles.btnWarning} onClick={()=>{this.props.poWithReceiversPrompt();}} ><span style={rpt1Style}>PO(s) with Receivers</span><br/>PDF format</td>
+                  <td className={styles.btnWarning} onClick={()=>{
+                    this.props.initPOWithReceivers();
+                    this.props.poWithReceiversPrompt();}} ><span style={rpt1Style}>PO(s) with Receivers</span><br/>PDF format</td>
                 </tr>
                 </tbody>
               </table>

@@ -27,7 +27,6 @@ export async function poNoReceiversPrompt(disp,getSt) {
   var cnt=0;
   var maxCnt=10;
 
-  dispatch({type:ACTION.INIT_NO_STATE});
   if(continueProcess){
     dispatch({type:ACTION.SET_PONORECEIVERS_DATE_START,dateStart:Moment().startOf('day').toDate()});
     dispatch({type:ACTION.SET_PONORECEIVERS_DATE_END,dateEnd:Moment().endOf('day').toDate()});
