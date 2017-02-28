@@ -1,7 +1,14 @@
 import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
 require('pdfjs-dist');
+//require('./pdfjs/web/viewer.html');
+/*
+    "extraFiles": [
+      "pdfjs/"
+    ],
+*/
 const qs = require ("querystring");
 
+PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 let menu;
 let template;
 let mainWindow = null;
