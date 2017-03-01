@@ -1,4 +1,4 @@
-import styles from '../../../css/rpt/styles.css';
+import styles from '../../../css/rpt/production/styles.css';
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Link,IndexLink } from 'react-router';

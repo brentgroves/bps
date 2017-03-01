@@ -2,7 +2,7 @@ import * as GRACTION from "./GRConst.js"
 import * as GRState from "./GRState.js"
 import { push } from 'react-router-redux';
 import * as GRAPI from '../../../api/production/gr/GenReceivers';
-import * as MISC from "../../../const/Misc.js"
+import * as MISC from "../../../const/production/Misc.js"
 //Supervisor-PLT-7
 
 export function cancelApp() {

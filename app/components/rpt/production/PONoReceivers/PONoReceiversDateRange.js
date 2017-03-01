@@ -9,7 +9,7 @@ var Moment = require('moment');
 var momentLocalizer = require('react-widgets/lib/localizers/moment');
 var classNames = require('classnames');
 import * as STATE from "../../../../actions/rpt/production/State.js"
-import styles from '../../../../css/rpt/styles.css';
+import styles from '../../../../css/rpt/production/styles.css';
 //import '../../../../css/Rpt/styles.global.css';
 
 momentLocalizer(Moment);

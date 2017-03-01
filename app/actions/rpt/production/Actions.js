@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import * as OPENPOEMAIL from '../../../api/rpt/production/OpenPOEmail/OpenPOEmail';
 import * as PONORECEIVERS from '../../../api/rpt/production/PONoReceivers/PONoReceivers';
 import * as POWITHRECEIVERS from '../../../api/rpt/production/POWithReceivers/POWithReceivers';
-import * as MISC from "../../../const/Misc.js"
+import * as MISC from "../../../const/production/Misc.js"
 var _ = require('lodash');
 var joins = require('lodash-joins');
 

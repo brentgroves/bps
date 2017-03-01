@@ -2,8 +2,8 @@
 var sql = require('mssql');
 import * as PORTACTION from "../../../actions/production/port/PORTActionConst.js"
 import * as PORTSTATE from "../../../actions/production/port/PORTState.js"
-import * as CONNECT from "../../../const/SQLConst.js"
-import * as MISC from "../../../const/Misc.js"
+import * as CONNECT from "../../../const/production/SQLConst.js"
+import * as MISC from "../../../const/production/Misc.js"
 
 var sql1Done=false;
 var sql1Cnt=0;

@@ -1,8 +1,8 @@
 var sql = require('mssql');
 import * as GRACTION from "../../../actions/production/gr/GRConst.js"
 import * as GRSTATE from "../../../actions/production/gr/GRState.js"
-import * as CONNECT from "../../../const/SQLConst.js"
-import * as MISC from "../../../const/Misc.js"
+import * as CONNECT from "../../../const/production/SQLConst.js"
+import * as MISC from "../../../const/production/Misc.js"
 
 var sql1Cnt=0;
 const ATTEMPTS=1;

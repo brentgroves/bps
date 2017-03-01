@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Row,Col,ListGroup,ListGroupItem,Panel,Table,Button,Glyphicon,ButtonGroup,ButtonToolbar} from 'react-bootstrap';
 var classNames = require('classnames');
 import * as STATE from "../../../../actions/rpt/production/State.js"
-import styles from '../../../../css/rpt/styles.css';
+import styles from '../../../../css/rpt/production/styles.css';
 var sorty    = require('sorty')
 var _ = require('lodash');
 var joins = require('lodash-joins');

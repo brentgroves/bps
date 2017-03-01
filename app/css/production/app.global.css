@@ -4,11 +4,11 @@
 
 
 body {
-  background: url("../images/background.jpg") no-repeat center center fixed; 
+  background: url("../../images/background.jpg") no-repeat center center fixed; 
 }
 
 .jumbotron {
-  background-image: url("../images/banner.jpg");
+  background-image: url("../../images/banner.jpg");
   background-size: 'cover';  
   padding: 0px 10px 0px 20px; 
   margin-left:15;

@@ -1,8 +1,8 @@
 var sql = require('mssql');
 import * as ACTION from "../../../../actions/rpt/production/Const.js"
 import * as STATE from "../../../../actions/rpt/production/State.js"
-import * as CONNECT from "../../../../const/SQLConst.js"
-import * as MISC from "../../../../const/Misc.js"
+import * as CONNECT from "../../../../const/production/SQLConst.js"
+import * as MISC from "../../../../const/production/Misc.js"
 
 
 var sql1Cnt=0;

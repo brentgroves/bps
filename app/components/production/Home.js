@@ -5,7 +5,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 import 'react-widgets/lib/less/react-widgets.less';
 import DateTimePicker from 'react-widgets/lib/DateTimePicker';
 import Multiselect from 'react-widgets/lib/Multiselect';
-import '../../css/rpt/styles.global.css';
+//import '../../css/rpt/styles.global.css';
 //import styles from '../css/home.css';
 
 import { Grid, Label, Row, Col, Navbar, Nav, NavItem, NavDropdown, MenuItem, Jumbotron,Button} from 'react-bootstrap';

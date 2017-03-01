@@ -102,8 +102,10 @@ app.on('ready', async () => {
     
   })
 
+  var whichApp=`file://${__dirname}/html/production/app.html`;
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.loadURL(whichApp);
+//  mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
