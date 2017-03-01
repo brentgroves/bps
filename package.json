@@ -54,7 +54,8 @@
       "main.js",
       "main.js.map",
       "package.json",
-      "pdfjs/"
+      "pdfjs/",
+      "html/"
     ],
     "win": {
       "target": "nsis"

@@ -99,10 +99,12 @@ export default validate(merge(baseConfig, {
 
     /**
      * Dynamically generate index.html page
+     * I don't use this.  Instead use html/production/app.html
      */
     new HtmlWebpackPlugin({
       filename: '../app.html',
       template: 'app/app.html',
+//      template: 'app/app.html',
       inject: false
     })
   ],
