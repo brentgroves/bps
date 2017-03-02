@@ -1,14 +1,8 @@
 import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
 require('pdfjs-dist');
-//require('./pdfjs/web/viewer.html');
-/*
-    "extraFiles": [
-      "pdfjs/"
-    ],
-*/
 const qs = require ("querystring");
-
 PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
 let menu;
 let template;
 let mainWindow = null;
@@ -17,6 +11,13 @@ let pdfWindow = null;
 let temp=app.getPath('temp');
 
 const debug=true;
+if('development'==process.env.NODE_ENV) {
+  process.env.NODE_CONFIG_DIR = __dirname + '/config';
+}else{
+  process.env.NODE_CONFIG_DIR = __dirname + '/config';
+}
+
+var config = require('config');
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support'); // eslint-disable-line
@@ -58,12 +59,13 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1400,
     height: 1200
   });
-//https://github.com/seanchas116/electron-pdfjs
+
   ipcMain.on('asynchronous-message', (event, fullPathName) => {
     console.log(fullPathName);  // prints "ping"
 
@@ -77,32 +79,44 @@ app.on('ready', async () => {
       },
     });
     let pdfURL = 'file://' + fullPathName;
-
 //    let pdfURL = 'file://' + app.getPath('temp') + '/myfile.pdf';
-
     let param = qs.stringify({file: pdfURL});
     if ('development'==process.env.NODE_ENV) {
       console.log(`pdfURL: ${pdfURL}`);
       console.log(param);
-  //    console.log(`app.on().__dirname: ${__dirname}`);
     }
-//file:///home/brent/srcnode/bps/app/pdfjs/web/viewer.html?file=file%3A%2F%2F%2Ftmp%2Fmyfile.pdf
 //  pdfWindow.webContents.openDevTools();
-
     pdfWindow.on('closed', function() {
       pdfWindow = null;
     });
 
- // pdfWindow.loadURL('file://' + __dirname + '/pdfjs/web/viewer.html?' + 'file=file%3A%2F%2F%2Ftmp%2Fmyfile2.pdf');
-
     pdfWindow.loadURL('file://' + __dirname + '/pdfjs/web/viewer.html?' + param);
-//    pdfWindow.loadURL('file://' + __dirname + '/pdfjs/web/viewer.html?' + param);
     //event.sender.send('asynchronous-reply', 'pong')
-    //pdfWindow.show();
     
   })
+//  process.env.NODE_CONFIG_DIR = `${__dirname}/app/config`;
 
-  var whichApp=`file://${__dirname}/html/production/app.html`;
+  if (true==debug){
+    console.log('NODE_CONFIG_DIR=' + config.util.getEnv('NODE_CONFIG_DIR'));
+  }
+
+  var dept = config.get('dept');
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`dept: ${dept}`);
+  }
+  var whichApp;
+  whichApp=`file://${__dirname}/html/production/app.html`;
+  switch (dept) {
+    case 'production':
+      whichApp=`file://${__dirname}/html/production/app.html`;
+      break;
+    case 'engineer':
+      whichApp=`file://${__dirname}/html/engineer/app.html`;
+      break;
+    default:
+      whichApp=`file://${__dirname}/html/production/app.html`;
+      break;
+  }
 
   mainWindow.loadURL(whichApp);
 //  mainWindow.loadURL(`file://${__dirname}/app.html`);
