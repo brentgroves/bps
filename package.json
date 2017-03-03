@@ -53,6 +53,7 @@
       ]
     },
     "files": [
+      "config/default.json",
       "dist/",
       "node_modules/",
       "main.js",
@@ -61,9 +62,12 @@
       "pdfjs/",
       "html/"
     ],
-    "asarUnpack":[
-      "config/default.json"
-    ],
+    "appx": {
+      "displayName": "Ashley"
+    },
+    "nsis": {
+      "oneClick": true
+    },
     "linux": {
       "target": [
         "deb",
