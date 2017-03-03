@@ -21,6 +21,8 @@
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./app/main.development",
     "postinstall": "concurrently \"install-app-deps\" \"node node_modules/fbjs-scripts/node/check-dev-engines.js package.json\"",
     "dev": "npm run hot-server -- --start-hot",
+    "package-nobuild": "npm run build",
+    "package-build": "build --publish never",
     "package": "npm run build && build --publish never",
     "package-win": "npm run build && build --win --x64",
     "package-linux": "npm run build && build --linux",
@@ -31,7 +33,10 @@
   "build": {
     "productName": "Ashley",
     "appId": "com.busche-cnc.com",
-    "category": "public.app-category.tools",
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
     "dmg": {
       "contents": [
         {
@@ -54,22 +59,17 @@
       "main.js.map",
       "package.json",
       "pdfjs/",
-      "html/",
-      "config/"
+      "html/"
     ],
-    "win": {
-      "target": "nsis"
-    },
+    "asarUnpack":[
+      "config/default.json"
+    ],
     "linux": {
       "target": [
         "deb",
         "AppImage"
       ]
     }
-  },
-  "directories": {
-    "buildResources": "resources",
-    "output": "release"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -123,7 +123,7 @@
     "css-loader": "^0.26.1",
     "devtron": "^1.4.0",
     "electron": "^1.4.15",
-    "electron-builder": "^11.4.4",
+    "electron-builder": "^14.5.3",
     "electron-devtools-installer": "^2.0.1",
     "enzyme": "^2.7.1",
     "eslint": "^3.14.0",
