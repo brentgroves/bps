@@ -9,7 +9,6 @@ import * as STATE from "../../../../actions/rpt/production/State.js"
 import * as MISC from "../../../../const/production/Misc.js"
 import * as PROGRESSBUTTON from "../../../../const/production/ProgressButtonConst.js"
 import * as SQLPRIMEDB from "../../../common/SQLPrimeDB.js"
-import * as SQLOPENPO from "./SQLOpenPO.js"
 
 //import * as hashLeftOuterJoin from "lodash-joins/lib/hash/hashLeftOuterJoin.js"
 var Moment = require('moment');

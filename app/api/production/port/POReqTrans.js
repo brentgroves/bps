@@ -322,6 +322,7 @@ export async function POReqTrans(disp,getSt,prime) {
     }
   }
 
+
   // CHECK FOR PREVIOUSLY FAILED SESSIONS
   if(continueProcess&&isFirstPass){
     PORTSQLINSLOG.sql1(dispatch,getState);
@@ -339,7 +340,6 @@ export async function POReqTrans(disp,getSt,prime) {
     }else{
       continueProcess=false;
     }
-
     cnt=0;
     while(continueProcess && !PORTSQLSETPOMASTRANGE.isDone()){
       if(++cnt>15 || PORTSQLSETPOMASTRANGE.didFail()){
@@ -349,7 +349,6 @@ export async function POReqTrans(disp,getSt,prime) {
         await MISC.sleep(2000);
       }
     }
-
 
     if(continueProcess && PORTSQLSETPOMASTRANGE.continuePORT()){
       let poMastRange=getState().POReqTrans.poMastRange;
@@ -460,6 +459,8 @@ export async function POReqTrans(disp,getSt,prime) {
       continueProcess=false;
     }
   }
+
+
   // DEBUG
  // dispatch({ type:PORTACTION.SET_STATE, state:PORTSTATE.SUCCESS });
  // return;
@@ -518,30 +519,7 @@ export async function POReqTrans(disp,getSt,prime) {
       console.log(`CM.sql1() timed out or FAILED DONT continue process.`);
     }
   }
-/*
-   cnt=0;
-
-  while(continueProcess && !M2M.isDone())
-  {
-    if(++cnt>15 || M2M.didFail()){
-      continueProcess=false;
-      break;
-    }else{
-      await MISC.sleep(2000);
-    }
-  }
-
-  if(continueProcess && M2M.continuePORT()){
-    if ('development'==process.env.NODE_ENV) {
-      console.log(`M2M.sql1() complete continue process.`);
-    }
-    CHECK1.portCheck1(dispatch)
-  }else{
-    if ('development'==process.env.NODE_ENV) {
-      console.log(`M2m.sql1() timed out or FAILED DONT continue process.`);
-    }
-  }
-*/
+  continueProcess=false;
 // CHECK#1
   cnt=0;
 

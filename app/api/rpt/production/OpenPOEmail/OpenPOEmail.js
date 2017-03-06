@@ -18,7 +18,7 @@ var joins = require('lodash-joins');
 var sorty    = require('sorty')
 var fs = require('fs');
 //var client = require("jsreport-client")('http://10.1.1.217:5488', 'admin', 'password')
-var client = require("jsreport-client")('http://localhost:5488', 'admin', 'password')
+var client = require("jsreport-client")(MISC.jsreport, 'admin', 'password')
 
 
 
@@ -47,9 +47,9 @@ export async function openPOEmailDateRange(disp,getSt) {
 
   }
   if(!openPOEmail.emailMRO && !openPOEmail.emailVendor){
-    dispatch({ type:ACTION.SET_OPENPOEMAIL_HEADER, emailHeader:{text:'One Email recipient!',valid:false}});
+    dispatch({ type:ACTION.SET_OPENPOEMAIL_EMAIL_HEADER, emailHeader:{text:'One Email recipient!',valid:false}});
   }else{
-    dispatch({ type:ACTION.SET_OPENPOEMAIL_HEADER, emailHeader:{text:'Email',valid:true}});
+    dispatch({ type:ACTION.SET_OPENPOEMAIL_EMAIL_HEADER, emailHeader:{text:'Email',valid:true}});
   }
   if(
     ((0==openPOEmail.select.length) && (null==openPOEmail.dateStart) || (null==openPOEmail.dateEnd)) ||
@@ -195,7 +195,7 @@ export async function openPOVendorEmail(disp,getSt) {
     });
     cnt=0;
     maxCnt=10;
-    while(!getState().ProdReports.sqlOpenPOVendorEmail.done){
+    while(!getState().ProdReports.openPOEmail.sqlOpenPOVendorEmail.done){
       if(++cnt>maxCnt ){
         break;
       }else{
@@ -203,8 +203,8 @@ export async function openPOVendorEmail(disp,getSt) {
       }
     }
 
-    if(getState().ProdReports.sqlOpenPOVendorEmail.failed || 
-      !getState().ProdReports.sqlOpenPOVendorEmail.done){
+    if(getState().ProdReports.openPOEmail.sqlOpenPOVendorEmail.failed || 
+      !getState().ProdReports.openPOEmail.sqlOpenPOVendorEmail.done){
       if ('development'==process.env.NODE_ENV) {
         console.log(`SQLOPENPOVENDOREMAIL.sql1() FAILED.`);
       }
@@ -244,7 +244,7 @@ export async function openPOVendorEmail(disp,getSt) {
       if ('development'==process.env.NODE_ENV) {
         console.log(`openPOPager() FAILED.`);
       }
-      dispatch({ type:ACTION.SET_REASON, reason:`openPOPager() FAILED. ` });
+      dispatch({ type:ACTION.SET_REASON, reason:`POPager() FAILED. ` });
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
       dispatch({ type:ACTION.SET_STATUS, status:'Can not update OpenPOEmail poItem page...' });
       continueProcess=false;
@@ -289,30 +289,30 @@ export async function ToggleOpenPOVisible(disp,getSt,po) {
     return poItemAdd; 
   });
 
-  dispatch({ type:ACTION.SET_OPENPO_POITEM, poItem:poItemNew });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_POITEM, poItem:poItemNew });
 
 
   if(continueProcess){
     dispatch((dispatch,getState) => {
       var disp = dispatch;
       var getSt = getState;
-      OpenPOPager(disp,getSt);
+      openPOPager(disp,getSt);
     });
 
     cnt=0;
     maxCnt=10;
 
-    while(!getState().ProdReports.openPOPager.done){
+    while(!getState().ProdReports.openPOEmail.pager.done){
       if(++cnt>maxCnt ){
         break;
       }else{
         await MISC.sleep(2000);
       }
     }
-    if(getState().ProdReports.openPOPager.failed ||
-      !getState().ProdReports.openPOPager.done){
+    if(getState().ProdReports.openPOEmail.pager.failed ||
+      !getState().ProdReports.openPOEmail.pager.done){
       if ('development'==process.env.NODE_ENV) {
-        console.log(`OpenPOPager() FAILED.`);
+        console.log(`openPOPager() FAILED.`);
       }
       dispatch({ type:ACTION.SET_REASON, reason:`ToggleOpenPOVisible() FAILED. ` });
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
@@ -361,7 +361,7 @@ export async function ToggleOpenPOSelected(disp,getSt,po) {
     return poItemAdd; 
   });
 
-  dispatch({ type:ACTION.SET_OPENPO_POITEM, poItem:poItemNew });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_POITEM, poItem:poItemNew });
 
 
   if(anySelected){
@@ -386,8 +386,8 @@ export function openPOPager(disp,getSt) {
     console.dir(getState().ProdReports.openPOEmail.poItem);
   }
 
-  dispatch({ type:ACTION.OPENPOEMAIL_PAGER_FAILED, failed:false });
-  dispatch({ type:ACTION.OPENPOEMAIL_PAGER_DONE, done:false });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_PAGER_FAILED, failed:false });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_PAGER_DONE, done:false });
 
 
   var poItemNew=getState().ProdReports.openPOEmail.poItem.map(function(poItem){
@@ -442,15 +442,15 @@ export function openPOPager(disp,getSt) {
       // no rows added
     }
     if ('development'==process.env.NODE_ENV) {
-      console.log(`OpenPOPager() After pageIndex change =>${pageIndex}`);
-      console.log(`OpenPOPager() After page change=>${page}`);
+      console.log(`openPOPager() After pageIndex change =>${pageIndex}`);
+      console.log(`openPOPager() After page change=>${page}`);
     }
     poItem.page=page;
     poChange=false;
     return poItem;
   });
   if ('development'==process.env.NODE_ENV) {
-    console.log(`OpenPOPager() poItemNew`);
+    console.log(`openPOPager() poItemNew`);
     console.dir(poItemNew);
   }
   var maxPage=page;    
@@ -460,7 +460,7 @@ export function openPOPager(disp,getSt) {
     dispatch({ type:ACTION.SET_OPENPOEMAIL_CURPAGE, curPage:maxPage });
   }
 
-  dispatch({ type:ACTION.OPENPOEMAIL_PAGER_DONE, done:true });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_PAGER_DONE, done:true });
 
 }
 

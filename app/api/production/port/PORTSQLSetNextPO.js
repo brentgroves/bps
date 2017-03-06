@@ -6,7 +6,6 @@ import * as PORTSTATE from "../../../actions/production/port/PORTState.js"
 import * as PORTCHK from "../../../const/production/ChkConst.js"
 import * as CONNECT from "../../../const/production/SQLConst.js"
 import * as MISC from "../../../const/production/Misc.js"
-var prod=false;
 
 var sql1Done=false;
 var sql1Cnt=0;

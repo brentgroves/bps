@@ -7,7 +7,6 @@ import * as PORTCHK from "../../../const/production/ChkConst.js"
 import * as CONNECT from "../../../const/production/SQLConst.js"
 import * as MISC from "../../../const/production/Misc.js"
 
-var prod=false;
 
 var portCheck1Done=false;
 var portCheck1Cnt=0;

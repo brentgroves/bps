@@ -53,14 +53,15 @@
       ]
     },
     "files": [
-      "config/default.json",
       "dist/",
       "node_modules/",
       "main.js",
       "main.js.map",
       "package.json",
+      "html/",
+      "files/",
       "pdfjs/",
-      "html/"
+      "config/"
     ],
     "appx": {
       "displayName": "Ashley"

@@ -100,19 +100,15 @@ function execSQL1(disp,poNumber,item,poCategory){
   var connection = new sql.Connection(CONNECT.cribDefTO, function(err) {
     // ... error checks
     if(null==err){
-      if ('development'==process.env.NODE_ENV) {
-        console.log(`PORTSQLUpdate1.execSQL1(poNumber,item,poCategory) Connection Sucess`);
-      }
-
-      
+   
       let statement;
-      if (MISC.prod===true) {
+      if (MISC.PROD===true) {
         statement = `
           update PODETAIL
           set UDF_POCATEGORY = ${poCategory}
           where 
           PONumber = ${poNumber} and Item = ${item}
-        `;
+        `;  
       }else{
         statement = `
           update btPODETAIL
@@ -122,10 +118,14 @@ function execSQL1(disp,poNumber,item,poCategory){
         `;
       }
 
+      if ('development'==process.env.NODE_ENV) {
+        console.log(`PORTSQLUpdate1.execSQL1(poNumber,item,poCategory) Connection Sucess`);
+        console.log(`poNumber,item,poCategory ${poCategory},${poNumber},${item}`);
+        console.log(`statement=>${statement}`)
+      }
 
       var request = new sql.Request(connection); 
-      request.query(
-      statement, function(err, recordset) {
+      request.query(statement, function(err, recordset) {
         if(null==err){
           // ... error checks
           if ('development'==process.env.NODE_ENV) {

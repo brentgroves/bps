@@ -34,7 +34,11 @@ const initialState = {
     pager:{done:false,failed:false},
     sqlOpenPO:{done:false,failed:false},
     sqlOpenPOVendorEmail:{done:false,failed:false}
-  }
+  },
+  progressBtn:PROGRESSBUTTON.READY,
+  reason:'',
+  status:'',
+  state:STATE.NOT_STARTED
 }
 
 export default function reducer( state = initialState, action) {
@@ -73,14 +77,14 @@ export default function reducer( state = initialState, action) {
             po:[],
             select:[],
             selectDelim:[],
-            pager:{$set:{done:false,failed:false}},
-            sqlOpenPO:{$set:{done:false,failed:false}},
-            sqlOpenPOVendorEmail:{$set:{done:false,failed:false}}
+            pager:{done:false,failed:false},
+            sqlOpenPO:{done:false,failed:false},
+            sqlOpenPOVendorEmail:{done:false,failed:false}
           }},
           progressBtn:{$set:PROGRESSBUTTON.READY},
           reason:{$set:''},
-          state:{$set: STATE.NOT_STARTED},
-          status:{$set: ''}
+          status:{$set: ''},
+          state:{$set:STATE.NOT_STARTED}
         });
       return newData;
     }
@@ -252,9 +256,9 @@ export default function reducer( state = initialState, action) {
               po:[],
               select:[],
               selectDelim:[],
-              pager:{$set:{done:false,failed:false}},
-              sqlOpenPOEmail:{$set:{done:false,failed:false}},
-              openPOEmailPager:{$set:{done:false,failed:false}}
+              pager:{done:false,failed:false},
+              sqlOpenPO:{done:false,failed:false},
+              sqlOpenPOVendorEmail:{done:false,failed:false}
           }},
           progressBtn:{$set:PROGRESSBUTTON.READY},
           reason:{$set:''},
@@ -266,14 +270,14 @@ export default function reducer( state = initialState, action) {
     {
       var openPOEmail = state.openPOEmail;
       if ('development'==process.env.NODE_ENV) {
-        console.log('OPENPO_EMAIL_MRO_TOGGLE ${openPO.emailMRO');
+        console.log('OPENPOEMAIL_MRO_TOGGLE ${openPOEmail.emailMRO');
       }
 
       openPOEmail.emailMRO=!openPOEmail.emailMRO;
       var newData = update(state, {openPOEmail: {$set: openPOEmail}});
       return newData;
     }
-    case ACTION.OPENPOEMAIL_VENDOR_TOGGLE:
+    case ACTION.SET_OPENPOEMAIL_VENDOR_TOGGLE:
     {
       var openPOEmail = state.openPOEmail;
       if ('development'==process.env.NODE_ENV) {
@@ -283,7 +287,7 @@ export default function reducer( state = initialState, action) {
       var newData = update(state, {openPOEmail: {$set: openPOEmail}});
       return newData;
     }
-    case ACTION.OPENPOEMAIL_PAGER_FAILED:
+    case ACTION.SET_OPENPOEMAIL_PAGER_FAILED:
     {
       var openPOEmail = state.openPOEmail;
       openPOEmail.pager.failed=action.failed;
@@ -291,7 +295,7 @@ export default function reducer( state = initialState, action) {
       return newData;
     }
 
-    case ACTION.OPENPOEMAIL_PAGER_DONE:
+    case ACTION.SET_OPENPOEMAIL_PAGER_DONE:
     {
       var openPOEmail = state.openPOEmail;
       openPOEmail.pager.done=action.done;
@@ -328,11 +332,11 @@ export default function reducer( state = initialState, action) {
     case ACTION.SET_OPENPOEMAIL_DATE_START:
     {
       var openPOEmail = state.openPOEmail;
-      openPO.dateStart=action.dateStart;
+      openPOEmail.dateStart=action.dateStart;
       var newData = update(state, {openPOEmail: {$set: openPOEmail}});
       return newData;
     }
-    case ACTION.SET_OPENPOEMAIL_HEADER:
+    case ACTION.SET_OPENPOEMAIL_EMAIL_HEADER:
     {
       var openPOEmail = state.openPOEmail;
       if ('development'==process.env.NODE_ENV) {

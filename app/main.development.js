@@ -95,7 +95,7 @@ app.on('ready', async () => {
     
   })
 //  process.env.NODE_CONFIG_DIR = `${__dirname}/app/config`;
-
+/*
   if (true==debug){
     console.log('NODE_CONFIG_DIR=' + config.util.getEnv('NODE_CONFIG_DIR'));
   }
@@ -119,7 +119,8 @@ app.on('ready', async () => {
   }
 
   mainWindow.loadURL(whichApp);
-//  mainWindow.loadURL(`file://${__dirname}/app.html`);
+*/
+  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();

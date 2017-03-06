@@ -190,6 +190,17 @@ export function setOpenPOEmailDateEnd(dateEnd) {
     dateEnd: dateEnd
   };
 }
+export function openPOVendorEmail() {
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`ACTIONS.openPOVendorEmail()->top.`);
+  }
+
+ return (dispatch,getState) => {
+    var disp = dispatch;
+    var getSt = getState;
+    OPENPOEMAIL.openPOVendorEmail(disp,getSt);
+  };
+}
 
 
 export function setOpenPOEmailCurPage(curPage) {
@@ -209,27 +220,27 @@ export function setOpenPOEmailNextPage() {
   };
 }
 
-export function toggleOpenPOEmailSelected(poNumber) {
+export function toggleOpenPOSelected(poNumber) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.toggleOpenPOEmailSelected()->top.`);
+    console.log(`ACTIONS.toggleOpenPOSelected()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    OPENPOEMAIL.ToggleOpenPOEmailSelected(disp,getSt,poNumber);
+    OPENPOEMAIL.ToggleOpenPOSelected(disp,getSt,poNumber);
   };
 }
 
-export function toggleOpenPOEmailVisible(poNumber) {
+export function toggleOpenPOVisible(poNumber) {
   if ('development'==process.env.NODE_ENV) {
-    console.log(`ACTIONS.toggleOpenPOEmailVisible()->top.`);
+    console.log(`ACTIONS.toggleOpenPOVisible()->top.`);
   }
 
  return (dispatch,getState) => {
     var disp = dispatch;
     var getSt = getState;
-    OPENPOEMAIL.ToggleOpenPOEmailVisible(disp,getSt,poNumber);
+    OPENPOEMAIL.ToggleOpenPOVisible(disp,getSt,poNumber);
   };
 }
 /////////////////////////////////////////////////////////////////

@@ -427,7 +427,7 @@ export default class GenReceivers extends Component {
             <LinkContainer  to="/POReqTrans">
               <NavItem eventKey={1}>PO Request Transfer</NavItem>
             </LinkContainer>      
-            <LinkContainer to="/Reports">
+            <LinkContainer to="/ProdReports">
               <NavItem eventKey={1}>Reports</NavItem>
             </LinkContainer>      
 

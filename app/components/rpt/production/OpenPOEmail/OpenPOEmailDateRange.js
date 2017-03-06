@@ -140,7 +140,7 @@ export default class OpenPOEmailDateRange extends React.Component {
                   data={this.props.ProdRpt.openPOEmail.po}
                   value={this.props.ProdRpt.openPOEmail.select}
                   onChange={select => {
-                    this.props.setOpenPOSelect(select);
+                    this.props.setOpenPOEmailSelect(select);
                     this.props.openPOEmailDateRange();
                   }} />
               </Panel>
@@ -165,7 +165,7 @@ export default class OpenPOEmailDateRange extends React.Component {
               <Col xs={1} >
                 <h1 style={{marginTop:0}}><Label  bsStyle="primary">Start</Label></h1>
               </Col>
-              <Col xs={8} xsOffset={1} style={{}}>
+              <Col xs={8} xsOffset={2} style={{}}>
                 <DateTimePicker 
                   onChange={(name,value)=>{
                     this.props.setOpenPODateStart(name);
@@ -178,7 +178,7 @@ export default class OpenPOEmailDateRange extends React.Component {
               <Col xs={1}>
                 <h1 style={{marginTop:0}}><Label  bsStyle="primary">End</Label></h1>
               </Col>
-              <Col xs={8} xsOffset={1}>
+              <Col xs={8} xsOffset={2}>
                 <DateTimePicker 
                   onChange={(name,value)=>{
                     this.props.setOpenPODateEnd(name);

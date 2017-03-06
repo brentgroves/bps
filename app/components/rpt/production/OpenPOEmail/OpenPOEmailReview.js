@@ -132,8 +132,8 @@ class OpenPOTable extends React.Component {
     }
     var poItem=this.props.poItem;
     var curPage=this.props.curPage;
-    var toggleOpenPOEmailSelected=this.props.toggleOpenPOEmailSelected;
-    var toggleOpenPOEmailVisible=this.props.toggleOpenPOEmailVisible;
+    var toggleOpenPOSelected=this.props.toggleOpenPOSelected;
+    var toggleOpenPOVisible=this.props.toggleOpenPOVisible;
     if ('development'==process.env.NODE_ENV) {
       console.log(`OpenPOTable.render().curPage=>${curPage}`);
     }
@@ -146,8 +146,8 @@ class OpenPOTable extends React.Component {
         }
         if(curPage==poItem.page){
           rows.push(<PORow 
-                      toggleOpenPOEmailSelected={toggleOpenPOEmailSelected} 
-                      toggleOpenPOEmailVisible={toggleOpenPOEmailVisible}
+                      toggleOpenPOSelected={toggleOpenPOSelected} 
+                      toggleOpenPOVisible={toggleOpenPOVisible}
                       poItem={poItem} key={poItem.poNumber} />);          
         }
 
@@ -193,8 +193,8 @@ export default class OpenPOEmailReview extends React.Component {
       test:this.test.bind(this)
     };
     if ('development'==process.env.NODE_ENV) {
-      console.log(`POPrompt:this.props.toggleOpenPOEmailSelected=>`);
-      console.dir(this.props.toggleOpenPOEmailSelected);
+      console.log(`POPrompt:this.props.toggleOpenPOSelected=>`);
+      console.dir(this.props.toggleOpenPOSelected);
     }
   }
  
@@ -259,8 +259,8 @@ export default class OpenPOEmailReview extends React.Component {
     return (
       <div>
           <OpenPOTable poItem={poItem} curPage={curPage}
-            toggleOpenPOEmailSelected={this.props.toggleOpenPOEmailSelected} 
-            toggleOpenPOEmailVisible={this.props.toggleOpenPOEmailVisible}/>
+            toggleOpenPOSelected={this.props.toggleOpenPOSelected} 
+            toggleOpenPOVisible={this.props.toggleOpenPOVisible}/>
                 <Row>
                   <Col xs={3}>
                     <ul className={pageNoClass}>

@@ -17,7 +17,7 @@ var _ = require('lodash');
 var joins = require('lodash-joins');
 var sorty    = require('sorty')
 var fs = require('fs');
-var client = require("jsreport-client")('http://localhost:5488', 'admin', 'password')
+var client = require("jsreport-client")(MISC.jsreport, 'admin', 'password')
 
 
 export async function poNoReceiversPrompt(disp,getSt) {

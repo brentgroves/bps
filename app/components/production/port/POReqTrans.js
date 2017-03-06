@@ -297,7 +297,7 @@ export default class POReqTrans extends Component {
               <NavItem eventKey={1}>Generate Receivers</NavItem>
             </LinkContainer>      
            &nbsp;&nbsp;&nbsp;
-            <LinkContainer to="/Reports">
+            <LinkContainer to="/ProdReports">
               <NavItem eventKey={1}>Reports</NavItem>
             </LinkContainer>      
 

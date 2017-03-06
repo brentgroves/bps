@@ -27,8 +27,8 @@ export async function sql1(disp,getSt){
 
 function init(dispatch){
   sql1Cnt=0;
-  dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLVENDOREMAIL_FAILED, failed:false });
-  dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLVENDOREMAIL_DONE, done:false });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_FAILED, failed:false });
+  dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_DONE, done:false });
 }
 
 
@@ -90,11 +90,11 @@ function execSQL1(disp,getSt){
             }
             dispatch({ type:ACTION.SET_REASON, reason:err.message });
             dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
-            dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLVENDOREMAIL_FAILED, failed:true });
+            dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_FAILED, failed:true });
           }
         }
       });
-      dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLVENDOREMAIL_DONE, done:true });
+      dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_DONE, done:true });
     }else{
       if(++sql1Cnt<ATTEMPTS) {
         if ('development'==process.env.NODE_ENV) {
@@ -108,7 +108,7 @@ function execSQL1(disp,getSt){
 
         dispatch({ type:ACTION.SET_REASON, reason:err.message });
         dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
-        dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLVENDOREMAIL_FAILED, failed:true });
+        dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_FAILED, failed:true });
       }
     }
   });
@@ -127,7 +127,7 @@ function execSQL1(disp,getSt){
 
       dispatch({ type:ACTION.SET_REASON, reason:err.message });
       dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
-      dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLVENDOREMAIL_FAILED, failed:true });
+      dispatch({ type:ACTION.SET_OPENPOEMAIL_SQLOPENPOVENDOREMAIL_FAILED, failed:true });
     }
   });
 }
