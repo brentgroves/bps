@@ -1,7 +1,8 @@
 import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
-require('pdfjs-dist');
+//require('pdfjs-dist');
 const qs = require ("querystring");
-PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+var fs = require('fs');
+//PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 let menu;
 let template;
@@ -11,13 +12,13 @@ let pdfWindow = null;
 let temp=app.getPath('temp');
 
 const debug=true;
+/*
 if('development'==process.env.NODE_ENV) {
   process.env.NODE_CONFIG_DIR = __dirname + '/config';
 }else{
   process.env.NODE_CONFIG_DIR = __dirname + '/config';
 }
-
-var config = require('config');
+*/
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support'); // eslint-disable-line
@@ -95,7 +96,22 @@ app.on('ready', async () => {
     
   })
 //  process.env.NODE_CONFIG_DIR = `${__dirname}/app/config`;
+  var userData=app.getPath('userData');
+  let defFile = __dirname + '/config/default.json';
+  var defConf = fs.readFileSync(defFile);
+  let fileName =  userData + '/default.json';
+  if (true==debug){
+    console.log(`defFile=${defFile}`);
+    console.log(`defConf=${defConf}`);
+    console.log(`fileName=${fileName}`);
+  }
+
+  //let default = __dirname + '/config/default.json';
+  fs.writeFileSync(fileName,defConf);
+
 /*
+var config = require('config');
+
   if (true==debug){
     console.log('NODE_CONFIG_DIR=' + config.util.getEnv('NODE_CONFIG_DIR'));
   }
@@ -120,6 +136,7 @@ app.on('ready', async () => {
 
   mainWindow.loadURL(whichApp);
 */
+
   mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
