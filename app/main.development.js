@@ -13,13 +13,6 @@ let pdfWindow = null;
 let temp=app.getPath('temp');
 
 const debug=false;
-/*
-if('development'==process.env.NODE_ENV) {
-  process.env.NODE_CONFIG_DIR = __dirname + '/config';
-}else{
-  process.env.NODE_CONFIG_DIR = __dirname + '/config';
-}
-*/
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support'); // eslint-disable-line
@@ -118,19 +111,22 @@ app.on('ready', async () => {
   //let default = __dirname + '/config/default.json';
   fs.writeFileSync(destFile,defConf);
 
-/*
-var config = require('config');
-
-  if (true==debug){
-    console.log('NODE_CONFIG_DIR=' + config.util.getEnv('NODE_CONFIG_DIR'));
+  if('development'==process.env.NODE_ENV) {
+    process.env.NODE_CONFIG_DIR = __dirname + path.sep + 'config';
+  }else{
+    process.env.NODE_CONFIG_DIR = __dirname + path.sep + 'config';
   }
 
+
+  var config = require('config');
   var dept = config.get('dept');
-  if ('development'==process.env.NODE_ENV) {
+  if ((true==debug)||('development'==process.env.NODE_ENV)){
+    console.log('NODE_CONFIG_DIR=' + config.util.getEnv('NODE_CONFIG_DIR'));
     console.log(`dept: ${dept}`);
   }
+
   var whichApp;
-  whichApp=`file://${__dirname}/html/production/app.html`;
+//  whichApp=`file://${__dirname}/html/production/app.html`;
   switch (dept) {
     case 'production':
       whichApp=`file://${__dirname}/html/production/app.html`;
@@ -144,9 +140,8 @@ var config = require('config');
   }
 
   mainWindow.loadURL(whichApp);
-*/
 
-  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
+//  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
