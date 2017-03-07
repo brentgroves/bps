@@ -186,7 +186,7 @@ export async function updateCheck2(disp,getSt,poNumber,vendorNumber,Address1,Add
     if ('development'==process.env.NODE_ENV) {
       console.log(`primeDB Success continue PO Request Transfer.`);
     }
-    UPDATE2.sql1(dispatch,getState,poNumber,item,poCategory);
+    UPDATE2.sql1(dispatch,getState,poNumber,vendorNumber,Address1,Address2,Address3,Address4);
   }
 
   /////////////////////////////
@@ -251,7 +251,7 @@ export async function updateCheck3(disp,getSt,vendorNumber,newM2mVendor,startPor
     if ('development'==process.env.NODE_ENV) {
       console.log(`primeDB Success continue PO Request Transfer.`);
     }
-    UPDATE3.sql1(dispatch,getState,poNumber,item,poCategory);
+    UPDATE3.sql1(dispatch,getState,vendorNumber,newM2mVendor);
   }
 
 ////////////////////////////
@@ -519,7 +519,6 @@ export async function POReqTrans(disp,getSt,prime) {
       console.log(`CM.sql1() timed out or FAILED DONT continue process.`);
     }
   }
-  continueProcess=false;
 // CHECK#1
   cnt=0;
 
@@ -705,7 +704,6 @@ export async function POReqTrans(disp,getSt,prime) {
       await MISC.sleep(2000);
     }
   }
-
   if(continueProcess && PORTSQLSETPOMAST.continuePORT()){
     if ('development'==process.env.NODE_ENV) {
       console.log(`PORTSQLSETPOMAST complete continue PORT process.`);
@@ -814,8 +812,6 @@ export async function POReqTrans(disp,getSt,prime) {
       await MISC.sleep(2000);
     }
   }
-
-
 
   if(continueProcess && PORTSQLSETPOMASTRANGE.continuePORT()){
     let poMastRange=getState().POReqTrans.poMastRange;

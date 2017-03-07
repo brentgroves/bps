@@ -1,6 +1,7 @@
 //require('../../react-pivot/example/demo.css')
 import React, { Component, PropTypes } from 'react';
 import ReactDataGrid from 'react-datagrid';
+require('../../../css/production/dg.global.css')
 var sorty    = require('sorty')
 var _ = require('lodash');
 var joins = require('lodash-joins');

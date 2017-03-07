@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import * as GRSTATE from "../../../actions/production/gr/GRState.js"
+import * as GRLIMITS from "../../../actions/production/gr/GRLimits.js"
+
 var _ = require('lodash');
 
 var catRecs = [{}],vendors=[{}],m2mVendors=[{}];
@@ -123,6 +125,7 @@ export default class GRGrid extends React.Component{
     }*/
 
     let notReadyCnt=_.size(_.filter(newRCMast, function(o) { return 0==o.fpacklist.trim().length; }));
+    let readyCnt=_.size(_.filter(newRCMast, function(o) { return 0!=o.fpacklist.trim().length; }));
     if ('development'==process.env.NODE_ENV) {
       console.log(`notReadyCnt => ${notReadyCnt}`);
     }
@@ -136,7 +139,7 @@ export default class GRGrid extends React.Component{
       }
     });
     */
-    if(notReadyCnt<=50){
+    if((notReadyCnt<=GRLIMITS.MAX_RECEIVERS)&&(1<=readyCnt)){
 //      this.props.RcvJoin();
       this.props.setState(GRSTATE.READY_TO_REVIEW);
     }else{

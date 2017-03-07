@@ -111,12 +111,6 @@ export function setM2mVendorSelect(m2mVendorSelect) {
 }
 
 
-export function setNextPO(nextPO) {
-  return {
-    type: PORTACTION.SET_NEXT_PO,
-    nextPO: nextPO
-  };
-}
 
 export function setNoCatList(noCatList) {
   return {

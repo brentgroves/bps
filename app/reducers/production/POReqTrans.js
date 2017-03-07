@@ -17,7 +17,6 @@ const initialState = {
     logId:0,
     m2mVendors:[{}],
     m2mVendorSelect:[{}],
-    nextPO:0,
     noCatList:[{}],
     noCribVen:[{}], 
     noM2mVen:[{}],  
@@ -53,7 +52,6 @@ export default function reducer( state = initialState, action) {
           logId:{$set:0},
           m2mVendors:{$set:[{}]},
           m2mVendorSelect:{$set:[{}]},
-          nextPO:{$set:0},
           noCatList:{$set: [{}]},
           noCribVen:{$set: [{}]},  
           noM2mVen:{$set: [{}]},  
@@ -164,18 +162,6 @@ export default function reducer( state = initialState, action) {
     {
       var newData = update(state, {m2mVendorSelect: {$set: action.m2mVendorSelect}});
       return newData;
-    }
-    case PORTACTION.SET_NEXT_PO:
-    {
-      if ('development'==process.env.NODE_ENV) {
-        console.log(`set nextPO`);
-      }
-      var newData = update(state, 
-        { 
-          nextPO: {$set: action.nextPO}
-        });
-      return newData;
-
     }
     case PORTACTION.SET_NO_CAT_LIST:
     {

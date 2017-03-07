@@ -2,6 +2,7 @@ import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
 //require('pdfjs-dist');
 const qs = require ("querystring");
 var fs = require('fs');
+var path = require("path");
 //PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 let menu;
@@ -11,7 +12,7 @@ let pdfWindow = null;
 //const pdfURL = "http://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf";
 let temp=app.getPath('temp');
 
-const debug=true;
+const debug=false;
 /*
 if('development'==process.env.NODE_ENV) {
   process.env.NODE_CONFIG_DIR = __dirname + '/config';
@@ -96,18 +97,26 @@ app.on('ready', async () => {
     
   })
 //  process.env.NODE_CONFIG_DIR = `${__dirname}/app/config`;
+  // souce file
+  var directories = [__dirname, "config"];
+  var directory = directories.join(path.sep);
+  let srcFile = directory + path.sep +'default.json';
+
+  // destination
   var userData=app.getPath('userData');
-  let defFile = __dirname + '/config/default.json';
-  var defConf = fs.readFileSync(defFile);
-  let fileName =  userData + '/default.json';
+  let destFile = userData + path.sep +'default.json';
+
+  var defConf = fs.readFileSync(srcFile);
+
   if (true==debug){
-    console.log(`defFile=${defFile}`);
+    console.log(`directory=${directory}`);  
+    console.log(`srcFile=${srcFile}`);
+    console.log(`destFile=${destFile}`);
     console.log(`defConf=${defConf}`);
-    console.log(`fileName=${fileName}`);
   }
 
   //let default = __dirname + '/config/default.json';
-  fs.writeFileSync(fileName,defConf);
+  fs.writeFileSync(destFile,defConf);
 
 /*
 var config = require('config');

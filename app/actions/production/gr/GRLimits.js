@@ -1,2 +1,2 @@
-export const MAX_RECEIVERS = 50;
+export const MAX_RECEIVERS = 250;
 
