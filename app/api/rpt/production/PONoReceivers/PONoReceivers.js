@@ -126,25 +126,32 @@ export async function poNoReceivers(disp,getSt) {
           console.log(`err =  `);
           console.dir(err);
         }
+        if(err){
+          dispatch({ type:ACTION.SET_REASON, reason:err.message});
+          dispatch({ type:ACTION.SET_STATE, state:STATE.FAILURE });
+          dispatch({ type:ACTION.SET_STATUS, status:'Can not connect to Report Server...' });
+          dispatch({ type:ACTION.SET_POWITHRECEIVERS_REPORT_FAILED, failed:true });
+          dispatch({ type:ACTION.SET_POWITHRECEIVERS_REPORT_DONE, done:true });
+        }else{
+          response.body(function(body) {
+            var dirName2 = dirName1;
+            let fileName =  dirName2 + '/myfile.pdf';
+            if ('development'==process.env.NODE_ENV) {
+              console.log(`dirName: ${dirName}`);
+              console.log(`dirName1: ${dirName1}`);
+              console.log(`dirName2: ${dirName2}`);
+              console.log(`fileName: ${fileName}`);
+            }
 
-        response.body(function(body) {
-          var dirName2 = dirName1;
-          let fileName =  dirName2 + '/myfile.pdf';
-          if ('development'==process.env.NODE_ENV) {
-            console.log(`dirName: ${dirName}`);
-            console.log(`dirName1: ${dirName1}`);
-            console.log(`dirName2: ${dirName2}`);
-            console.log(`fileName: ${fileName}`);
-          }
-
-          fs.writeFileSync(fileName,body);
-          dispatch({ type:ACTION.SET_PONORECEIVERS_REPORT_DONE, done:true });
-          if ('development'==process.env.NODE_ENV) {
-            console.log(`Done creating file myfile.pdf `);
-            console.log(`fileName: ${fileName}`);
-          }
-          ipcRenderer.send('asynchronous-message', fileName)
-        });
+            fs.writeFileSync(fileName,body);
+            dispatch({ type:ACTION.SET_PONORECEIVERS_REPORT_DONE, done:true });
+            if ('development'==process.env.NODE_ENV) {
+              console.log(`Done creating file myfile.pdf `);
+              console.log(`fileName: ${fileName}`);
+            }
+            ipcRenderer.send('asynchronous-message', fileName)
+          });
+        }
     });
     var cnt=0;
     var maxCnt=15;
