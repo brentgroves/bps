@@ -3,7 +3,7 @@ import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
 const qs = require ("querystring");
 var fs = require('fs');
 var path = require("path");
-const settings = require('electron-settings');
+//const settings = require('electron-settings');
 
 
 let menu;
@@ -12,12 +12,9 @@ let mainWindow = null;
 let pdfWindow = null;
 let temp=app.getPath('temp');
 
-const debug=false;
+const debug=true;
 
 
-settings.defaults({
-  dept: 'production'
-});
 
 
 if (process.env.NODE_ENV === 'production') {
@@ -67,6 +64,36 @@ app.on('ready', async () => {
     height: 1200
   });
 
+
+  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+
+  if ((true==debug)||(process.env.NODE_ENV === 'development')) {
+    mainWindow.openDevTools();
+    mainWindow.webContents.on('context-menu', (e, props) => {
+      const { x, y } = props;
+
+      Menu.buildFromTemplate([{
+        label: 'Inspect element',
+        click() {
+          mainWindow.inspectElement(x, y);
+        }
+      }]).popup(mainWindow);
+    });
+  }
+
+  menu = Menu.buildFromTemplate(template);
+  //    mainWindow.setMenu(menu);
+  mainWindow.setMenu(null);
+
   ipcMain.on('asynchronous-message', (event, fullPathName) => {
     console.log(fullPathName);  // prints "ping"
 
@@ -96,54 +123,5 @@ app.on('ready', async () => {
     
   });
 
-  var dept;
-  settings.get('dept').then(val => {
-    console.log(val);
-    dept=val;
-  });
-
-  var whichApp;
-//  whichApp=`file://${__dirname}/html/production/app.html`;
-  switch (dept) {
-    case 'production':
-      whichApp=`file://${__dirname}/html/production/app.html`;
-      break;
-    case 'engineer':
-      whichApp=`file://${__dirname}/html/engineer/app.html`;
-      break;
-    default:
-      whichApp=`file://${__dirname}/html/production/app.html`;
-      break;
-  }
-  mainWindow.loadURL(whichApp);
-
-//  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
-
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.show();
-    mainWindow.focus();
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  if ((true==debug)||(process.env.NODE_ENV === 'development')) {
-    mainWindow.openDevTools();
-    mainWindow.webContents.on('context-menu', (e, props) => {
-      const { x, y } = props;
-
-      Menu.buildFromTemplate([{
-        label: 'Inspect element',
-        click() {
-          mainWindow.inspectElement(x, y);
-        }
-      }]).popup(mainWindow);
-    });
-  }
-
-  menu = Menu.buildFromTemplate(template);
-  //    mainWindow.setMenu(menu);
-  mainWindow.setMenu(null);
 
 });

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from '../../containers/App';
-import HomePage from '../../containers/production/HomePage';
+import HomePage from '../../containers/engineer/HomePage';
 import POReqTrans from '../../containers/production/port/POReqTrans';
 import GenReceivers from '../../containers/production/gr/GenReceivers'
 import ProdReports from '../../containers/rpt/production/Reports'
