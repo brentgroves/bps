@@ -3,8 +3,7 @@ import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
 const qs = require ("querystring");
 var fs = require('fs');
 var path = require("path");
-//const settings = require('electron-settings');
-
+const settings = require('electron-settings');
 
 let menu;
 let template;
@@ -14,6 +13,10 @@ let temp=app.getPath('temp');
 
 const debug=true;
 
+
+settings.defaults({
+  app: 'production'
+});
 
 
 
@@ -53,75 +56,93 @@ const installExtensions = async () => {
       .catch(console.log);
   }
 };
+ipcMain.on('asynchronous-message', (event, fullPathName) => {
+  console.log(fullPathName);  // prints "ping"
+
+  pdfWindow = new BrowserWindow({
+    show: true,
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: false,
+      webSecurity: false,
+    },
+  });
+  let pdfURL = 'file://' + fullPathName;
+//    let pdfURL = 'file://' + app.getPath('temp') + '/myfile.pdf';
+  let param = qs.stringify({file: pdfURL});
+  if ('development'==process.env.NODE_ENV) {
+    console.log(`pdfURL: ${pdfURL}`);
+    console.log(param);
+  }
+//  pdfWindow.webContents.openDevTools();
+  pdfWindow.on('closed', function() {
+    pdfWindow = null;
+  });
+
+  pdfWindow.loadURL('file://' + __dirname + '/pdfjs/web/viewer.html?' + param);
+  //event.sender.send('asynchronous-reply', 'pong')
+  
+});
 
 app.on('ready', async () => {
   await installExtensions();
 
 
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: 1400,
-    height: 1200
-  });
-
-
-  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
-
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.show();
-    mainWindow.focus();
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  if ((true==debug)||(process.env.NODE_ENV === 'development')) {
-    mainWindow.openDevTools();
-    mainWindow.webContents.on('context-menu', (e, props) => {
-      const { x, y } = props;
-
-      Menu.buildFromTemplate([{
-        label: 'Inspect element',
-        click() {
-          mainWindow.inspectElement(x, y);
-        }
-      }]).popup(mainWindow);
-    });
-  }
-
-  menu = Menu.buildFromTemplate(template);
-  //    mainWindow.setMenu(menu);
-  mainWindow.setMenu(null);
-
-  ipcMain.on('asynchronous-message', (event, fullPathName) => {
-    console.log(fullPathName);  // prints "ping"
-
-    pdfWindow = new BrowserWindow({
-      show: true,
-      width: 800,
-      height: 600,
-      webPreferences: {
-        nodeIntegration: false,
-        webSecurity: false,
-      },
-    });
-    let pdfURL = 'file://' + fullPathName;
-//    let pdfURL = 'file://' + app.getPath('temp') + '/myfile.pdf';
-    let param = qs.stringify({file: pdfURL});
-    if ('development'==process.env.NODE_ENV) {
-      console.log(`pdfURL: ${pdfURL}`);
-      console.log(param);
+  await settings.get('app').then(val => {
+    var width;
+    var height;
+    switch (val) {
+      case 'production':
+        width=1400;
+        height=1200;
+        break;
+      case 'engineer':
+        width=1900;
+        height=1200;
+        break;
+      default:
+        break;
     }
-//  pdfWindow.webContents.openDevTools();
-    pdfWindow.on('closed', function() {
-      pdfWindow = null;
+
+    mainWindow = new BrowserWindow({
+      show: false,
+      width: width,
+      height: height
     });
 
-    pdfWindow.loadURL('file://' + __dirname + '/pdfjs/web/viewer.html?' + param);
-    //event.sender.send('asynchronous-reply', 'pong')
-    
+
+    mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
+
+    mainWindow.webContents.on('did-finish-load', () => {
+      mainWindow.show();
+      mainWindow.focus();
+    });
+
+    mainWindow.on('closed', () => {
+      mainWindow = null;
+    });
+
+    if ((true==debug)||(process.env.NODE_ENV === 'development')) {
+      mainWindow.openDevTools();
+      mainWindow.webContents.on('context-menu', (e, props) => {
+        const { x, y } = props;
+
+        Menu.buildFromTemplate([{
+          label: 'Inspect element',
+          click() {
+            mainWindow.inspectElement(x, y);
+          }
+        }]).popup(mainWindow);
+      });
+    }
+
+    menu = Menu.buildFromTemplate(template);
+    //    mainWindow.setMenu(menu);
+    mainWindow.setMenu(null);
+
   });
+
 
 
 });

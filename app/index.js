@@ -11,7 +11,7 @@ import configureStore from './store/configureStore';
 const settings = require('electron-settings');
 
 settings.defaults({
-  dept: 'production'
+  app: 'production'
 });
 
 /*
@@ -71,7 +71,7 @@ if('production'==dept){
 
 }
 */
-settings.get('dept').then(val => {
+settings.get('app').then(val => {
 	var store;
 	var history;
 	var dept;
