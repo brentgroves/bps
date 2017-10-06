@@ -178,8 +178,9 @@ export default class GRGrid extends React.Component{
           cellEdit={this.cellEditPropChk1} insertRow={false}>
           <TableHeaderColumn dataField="identity_column" hidden={true} isKey={true}>Row</TableHeaderColumn>
           <TableHeaderColumn dataField="Remove" width="40"  editable={ { type: 'checkbox', options: { values: 'Y:N' } } } >Del</TableHeaderColumn>
-          <TableHeaderColumn dataField="fpono" width="155" columnClassName='td-first-column' editable={false} >PO Number</TableHeaderColumn>
-          <TableHeaderColumn dataField="freceiver" width="155" editable={false} >Receiver</TableHeaderColumn>
+          <TableHeaderColumn dataField="fpono" width="125" columnClassName='td-first-column' editable={false} >PO Number</TableHeaderColumn>
+          <TableHeaderColumn dataField="freceiver" width="120" editable={false} >Receiver</TableHeaderColumn>
+          <TableHeaderColumn dataField="rcvdate" width="120" editable={false} >Date</TableHeaderColumn>
           <TableHeaderColumn dataField="fcompany" width="300" editable={false} >Company</TableHeaderColumn>
           <TableHeaderColumn dataField="fpacklist" width="200" editable={{type:'text', validator:this.fpacklistValidator}}  >Packing List</TableHeaderColumn>
           <TableHeaderColumn dataField="ffrtcarr" width="200" columnClassName={columnClassNameFormat} 

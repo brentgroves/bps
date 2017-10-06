@@ -32,7 +32,7 @@ export default class Home extends Component {
         <Col >
           <Jumbotron style={{marginLeft:0,marginRight:0}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Busche Production Software</h1>
-            <p style={{textAlign: 'center'}}><strong>Description:{" "}</strong>Please choose from one of the activities listed below.</p>
+            <h3 style={{color:'black',textAlign: 'center'}}><strong>Description:{" "}</strong>Please choose from one of the activities listed below.</h3>
             <br/>
           </Jumbotron>
         </Col>

@@ -52,8 +52,8 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
              <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Connecting to Databases</h1>
-            <p style={{textAlign: 'center'}}><strong>Description:{" "}</strong>Attempting to connect to CribMaster and Made2Manage</p>
-            <p style={{textAlign: 'center'}}><strong>Please wait...</strong></p> 
+            <h3 style={{color:'black',textAlign: 'center'}} ><strong>Description:{" "}</strong>Attempting to connect to CribMaster and Made2Manage</h3>
+            <h3 style={{color:'black',textAlign: 'center'}} ><strong>Please wait...</strong></h3> 
             <br/>
           </Jumbotron>
         </Col>
@@ -64,16 +64,16 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
              <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Generate Receivers</h1>
-            <p style={{padding: '0px'}}>This App generates M2m receivers from items received into Cribmaster.
+            <h3 style={{color:'black'}} >This App generates M2m receivers from items received into Cribmaster.
             It includes a ROLLBACK process so if it fails at ANY point just run it again. 
             <br/><br/>
             <strong>Do not START if you are not ready with packing list numbers for most if not ALL items received.  
-            At most 5 items without a packing list number are allowed.</strong>
+            </strong>
             <br/><br/>
             <strong>Do NOT give receipts to Accounting until the program completes successfully.</strong>
-            </p>
+            </h3>
             <br/>
-            <p style={{textAlign: 'center'}}>Once the GO! button is clicked this process will start.  </p>            
+            <h3 style={{color:'black',textAlign: 'center'}} >Once the GO! button is clicked this process will start.  </h3>            
             <br/>
           </Jumbotron>
           </Col >
@@ -112,8 +112,8 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Validation in Progress</h1>
-            <p style={{padding: '0px'}}>Checking if the previous session finished gracefully,
-            and all POs items are ready to receive into Made2Manage.  This shouldn't take long.</p>
+            <h3 style={{color:'black'}} >Checking if the previous session finished gracefully,
+            and all POs items are ready to receive into Made2Manage.  This shouldn't take long.</h3>
             <br/>
           </Jumbotron>
 
@@ -127,8 +127,8 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Preparing Receivers</h1>
-            <p style={{textAlign: 'center'}}>Preparing receivers that will need to be updated with a freight carrier & packing list.</p>
-            <p style={{textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></p> 
+            <h3 style={{color:'black',textAlign: 'center'}} >Preparing receivers that will need to be updated with a freight carrier & packing list.</h3>
+            <h3 style={{color:'black',textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></h3> 
             <br/>
           </Jumbotron>
 
@@ -143,8 +143,10 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Freight Carrier & Packing List</h1>
-            <p style={{textAlign: 'center',paddingBottom:5}}>Please enter the packing list number and
-            select the appropriate freight carrier before continuing. Check the Del field to bypass this receiver.</p>
+            <h3 style={{color:'black'}} >Please enter the packing list number and
+            select the appropriate freight carrier before continuing.</h3>
+            <h3 style={{color:'black'}}><strong>Note: {' '}</strong>Check the 'Del' field to bypass creating this receiver for good.</h3>
+            <br/>
           </Jumbotron>
         </Col>
       </Row>
@@ -156,9 +158,10 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Ready to Review</h1>
-            <p >Please enter more packing list numbers or press the 'Review' button to review receiver 
-            items to be inserted. Check the Del field to bypass this receiver.</p>
-            <p><strong>Note: {' '}</strong>Only PO(s) with a packing list number will be processed this run.</p>
+            <h3 style={{color:'black',marginTop:5}} >Please enter more packing list numbers or press the 'Review' button to review receiver 
+            items to be inserted. Check the Del field to bypass this receiver.</h3>
+            <h3 style={{color:'black'}}><strong>Note: {' '}</strong>Only PO(s) with a packing list number will be processed this run.</h3>
+            <br/>
           </Jumbotron>
         </Col>
       </Row>
@@ -170,8 +173,8 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Preparing Review</h1>
-            <p style={{textAlign: 'center'}}>Preparing for review. Generating tables and calculating sums.</p>
-            <p style={{textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></p> 
+            <h3 style={{color:'black'}} >Preparing for review. Generating tables and calculating sums.</h3>
+            <h3 style={{color:'black',textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></h3> 
             <br/>
 
           </Jumbotron>
@@ -186,9 +189,11 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Review Receivers</h1>
-            <p >Please review items before continuing. If the 
+            <h3 style={{color:'black'}} >Please review items before continuing. If the 
             freight carrier, packing list number, and quantity(s) look good then press the
-            'save' button to create receiver(s) in Made2Manage.</p>
+            'save' button to create receiver(s) in Made2Manage.</h3>
+            <h3 style={{color:'black'}}><strong>Remember: {' '}</strong>Only PO(s) with a packing list number will be processed this run.</h3>
+            <br/>  
           </Jumbotron>
         </Col>
       </Row>
@@ -201,10 +206,10 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Generating Receivers</h1>
-            <p >The verified receiver(s) are now being inserted into Made2Manage.</p>
-            <p><strong>Note:{" "}</strong>This is the last crucial step in the process.  After this Accounting 
-            will be able to verify the receipts.</p>
-            <p style={{textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></p> 
+            <h3 style={{color:'black'}} >The verified receiver(s) are now being inserted into Made2Manage.</h3>
+            <h3 style={{color:'black'}} ><strong>Note:{" "}</strong>This is the last crucial step in the process.  After this Accounting 
+            will be able to verify the receipts.</h3>
+            <h3 style={{color:'black',textAlign: 'center',paddingBottom:5}} ><strong>Please wait...</strong></h3> 
             <br/>
           </Jumbotron>
         </Col>
@@ -219,11 +224,11 @@ export default class GenReceivers extends Component {
         <Col >
           <Jumbotron style={{marginLeft:15,marginRight:15}} >
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>Creating Report</h1>
-            <p >Generating the PO Status report now!
-            This report shows the current status of all PO(s) generated by this App.</p>
-            <p><strong>At this point Made2Manage has been updated with the new Receivers, and
-            even if the report fails you do not need to rerun the App.</strong></p>
-            <p style={{textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></p> 
+            <h3 style={{color:'black'}} >Generating the PO Status report now!
+            This report shows the current status of all PO(s) generated by this App.</h3>
+            <h3 style={{color:'black'}} ><strong>At this point Made2Manage has been updated with the new Receivers, and
+            even if the report fails you do not need to rerun the App.</strong></h3>
+            <h3 style={{color:'black',textAlign: 'center',paddingBottom:5}}><strong>Please wait...</strong></h3> 
             <br/>
           </Jumbotron>
         </Col>
@@ -254,11 +259,11 @@ export default class GenReceivers extends Component {
             <h1 style={{textAlign: 'center',marginTop:15,marginBottom:0}}>SUCCESS!</h1>
             <br/>
             <div style={{textAlign: 'left'}}>
-            <p >All of the requested PO(s) items have been received
-            into Made2Manage successfully.</p>
-            <p>Made2Manage has been updated and you can now give the receipts to the Accounting dept.</p> 
-            <p>Use the menu bar to navigate back to the main menu
-            or click the 'x' in the upper right corner to exit this App.</p>
+            <h3 style={{color:'black'}}>All of the requested PO(s) items have been received
+            into Made2Manage successfully.</h3>
+            <h3 style={{color:'black'}}>Made2Manage has been updated and you can now give the receipts to the Accounting dept.</h3> 
+            <h3 style={{color:'black'}}>Use the menu bar to navigate back to the main menu
+            or click the 'x' in the upper right corner to exit this App.</h3>
             </div>
             <br/>
           </Jumbotron>

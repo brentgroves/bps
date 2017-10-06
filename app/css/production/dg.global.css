@@ -1307,7 +1307,7 @@ html.u-app body * {
 */
 .react-datagrid .z-group-cell .z-content {
   display: block;
-  width: 280px;
+  width: 450px;
     position:absolute;
     text-align:right;
 }

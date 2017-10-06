@@ -153,6 +153,8 @@ export async function m2mGenReceivers(disp,getSt) {
     }
   }
 
+//  continueProcess=false; // just after step 20 log update
+
 
   if(continueProcess){
     dispatch((dispatch,getState) => {
@@ -179,6 +181,7 @@ export async function m2mGenReceivers(disp,getSt) {
     }
   }
 
+  //continueProcess=false; // just after rcmast insert to m2m
 
 
   if(continueProcess){
@@ -232,7 +235,7 @@ export async function m2mGenReceivers(disp,getSt) {
    
   }
 
-
+  //continueProcess=false; // just after rcitem update to m2m
   if(continueProcess){
     dispatch((dispatch,getState) => {
       var disp = dispatch;
@@ -284,6 +287,7 @@ export async function m2mGenReceivers(disp,getSt) {
     }
    
   }
+  // continueProcess=false; // just after postatus update to m2m
 
   if(continueProcess){
     dispatch((dispatch,getState) => {
@@ -310,8 +314,8 @@ export async function m2mGenReceivers(disp,getSt) {
     }
    
   }
-//999999
-//  continueProcess=false;
+
+//  continueProcess=false; // just after btGRTransInsert
 //  dispatch({ type:GRACTION.SET_STATE, state:GRSTATE.SUCCESS });
 
 
@@ -729,7 +733,7 @@ export async function start(disp,getSt) {
     }
 
   }
-//99999
+
 //  continueProcess=false;
 //  dispatch({ type:GRACTION.SET_STATE, state:GRSTATE.SUCCESS });
 
@@ -791,11 +795,10 @@ export async function start(disp,getSt) {
     }else{
       if ('development'==process.env.NODE_ENV) {
         console.log(`SQLSETRECEIVERCOUNT.sql1() Success.`);
+        console.log(`receiver count = ${getState().GenReceivers.receiverCount}`);
       }
     }
   }
-
-
 
 
   var finish=false;
@@ -866,6 +869,7 @@ export async function start(disp,getSt) {
       }
     }
 
+//    continueProcess=false // DEBUG -UPTO SETTING CURRENT RECEIVER
 
     if(continueProcess){
       dispatch({ type:GRACTION.SET_CHECK1, chk1:CHK.SUCCESS });
@@ -979,6 +983,7 @@ export async function start(disp,getSt) {
     }
 
   }
+   //continueProcess=false // DEBUG -UPTO SETTING shipping options array
 
   if(continueProcess){
     dispatch((dispatch,getState) => {
@@ -1039,7 +1044,7 @@ export function RcvJoin(disp,getSt) {
 
   var rcmSelect = _.map(rcmast).map(function(x){
 
-    var rcmPick = _.pick(x, ['freceiver', 'fpono','fpacklist','fcompany','ffrtcarr']); 
+    var rcmPick = _.pick(x, ['freceiver', 'rcvdate','fpono','fpacklist','fcompany','ffrtcarr']); 
 
     return rcmPick; 
   });
@@ -1047,7 +1052,7 @@ export function RcvJoin(disp,getSt) {
   var rcvJoin =joins.hashLeftOuterJoin(rcmSelect, accessor, rcitem, accessor);
 
   var rcvMod = _.map(rcvJoin).map(function(x){
-    var poRecv=x.fpono+' / '+x.freceiver; 
+    var poRecv=x.fpono+' / '+x.freceiver+' --Date: '+x.rcvdate; 
     var totCost=parseFloat(x.fqtyrecv)  * parseFloat(x.fucost);
     totCost=totCost.toFixed(2)
     var rcmAdd = _.assign(x, {'poRecv':poRecv},{'totCost':totCost},{'sumRow':false});

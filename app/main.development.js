@@ -3,6 +3,7 @@ import { app, BrowserWindow, Menu, shell,ipcMain } from 'electron';
 const qs = require ("querystring");
 var fs = require('fs');
 var path = require("path");
+//const settings = require('electron-settings'); SEE IOT APP FOR USAGE
 //PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 let menu;
@@ -89,44 +90,13 @@ app.on('ready', async () => {
     //event.sender.send('asynchronous-reply', 'pong')
     
   })
-//  process.env.NODE_CONFIG_DIR = `${__dirname}/app/config`;
-  // souce file
-  var directories = [__dirname, "config"];
-  var directory = directories.join(path.sep);
-  let srcFile = directory + path.sep +'default.json';
-
-  // destination
-  var userData=app.getPath('userData');
-  let destFile = userData + path.sep +'default.json';
-
-  var defConf = fs.readFileSync(srcFile);
-
-  if (true==debug){
-    console.log(`directory=${directory}`);  
-    console.log(`srcFile=${srcFile}`);
-    console.log(`destFile=${destFile}`);
-    console.log(`defConf=${defConf}`);
-  }
-
-  //let default = __dirname + '/config/default.json';
-  fs.writeFileSync(destFile,defConf);
-
-  if('development'==process.env.NODE_ENV) {
-    process.env.NODE_CONFIG_DIR = __dirname + path.sep + 'config';
-  }else{
-    process.env.NODE_CONFIG_DIR = __dirname + path.sep + 'config';
-  }
-
-
-  var config = require('config');
-  var dept = config.get('dept');
-  if ((true==debug)||('development'==process.env.NODE_ENV)){
-    console.log('NODE_CONFIG_DIR=' + config.util.getEnv('NODE_CONFIG_DIR'));
-    console.log(`dept: ${dept}`);
-  }
 
   var whichApp;
-//  whichApp=`file://${__dirname}/html/production/app.html`;
+
+  whichApp=`file://${__dirname}/html/production/app.html`;
+/*  
+  SEE IOT APP FOR HOW TO DO THIS PROPERLY.  IN FACT IF THIS BECOMES A 
+  NECESSITY THEN USE THE IOT APP AND COPY THIS BPS SOFTWARE INTO IT 
   switch (dept) {
     case 'production':
       whichApp=`file://${__dirname}/html/production/app.html`;
@@ -138,7 +108,7 @@ app.on('ready', async () => {
       whichApp=`file://${__dirname}/html/production/app.html`;
       break;
   }
-
+*/
   mainWindow.loadURL(whichApp);
 
 //  mainWindow.loadURL(`file://${__dirname}/html/production/app.html`);
